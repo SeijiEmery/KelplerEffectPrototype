@@ -6,15 +6,15 @@ using UnityEngine;
 // KeyboardController + VRController should use this to send movement + targeting
 // commands to all selected unit(s).
 // A unit is selectable iff it has a SelectableUnit component.
-public class SelectionManager : MonoBehaviour
+public class UnitSelectionManager : MonoBehaviour
 {
     // TODO: implement selection
-    void AddUnitToSelection(SelectableUnit unit) { }
-    void RemoveUnitFromSelection(SelectableUnit unit) { }
-    void ClearSelection(SelectableUnit unit) { }
+    public void AddUnitToSelection(SelectableUnit unit) { }
+    public void RemoveUnitFromSelection(SelectableUnit unit) { }
+    public void ClearSelection() { }
 
     // TODO: should forward these commands to all selected unit(s)
-    void MoveToPosition(Vector3 targetPos) { }
-    void SetTargetingPosition(Vector3 targetPos) { }
-    void SetMovementDirection(Vector3 normalizedMoveDir) { }
+    public void MoveToPosition(Vector3 targetPos) { }
+    public void SetTargetingPosition(Vector3 targetPos) { }
+    public void SetMovementDirection(Vector3 normalizedMoveDir) { }
 }
