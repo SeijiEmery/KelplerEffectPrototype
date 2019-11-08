@@ -7,10 +7,16 @@ public class BulletMovement : MonoBehaviour
     public float speed = 2f;
     void Start()
     {
-        GameObject[] redShips = GameObject.FindGameObjectsWithTag("RedShip");
-        foreach (GameObject redship in redShips)
+        GameObject[] subs = GameObject.FindGameObjectsWithTag("Sub");
+        GameObject[] crabs = GameObject.FindGameObjectsWithTag("Crab");
+
+        foreach (GameObject sub in subs)
         {
-            Physics.IgnoreCollision(redship.GetComponent<Collider>(), GetComponent<Collider>());
+            Physics.IgnoreCollision(sub.GetComponent<Collider>(), GetComponent<Collider>());
+        }
+        foreach (GameObject crab in crabs)
+        {
+            Physics.IgnoreCollision(crab.GetComponent<Collider>(), GetComponent<Collider>());
         }
     }
     void FixedUpdate()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleCharacterController : MonoBehaviour
+public class SubTestController : MonoBehaviour
 {
     public float speed = 6.0f;                                      //Set speed
     public float bulletSpeed = 2.0f;
@@ -12,7 +12,6 @@ public class SimpleCharacterController : MonoBehaviour
     public GameObject regularBullet;
     public GameObject laserBullet;
 
-    private Vector3 moveDirection = Vector3.zero;
     private float shootingGap = 0f;
     void Start()
     {
@@ -21,10 +20,19 @@ public class SimpleCharacterController : MonoBehaviour
     void FixedUpdate()
     {
         //Simple moving
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
-        moveDirection *= speed;
-        transform.Translate(moveDirection * Time.deltaTime);
-        
+        if (Input.GetKey(KeyCode.LeftArrow))
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.RightArrow))
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.UpArrow))
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.DownArrow))
+            transform.Translate(Vector3.back * speed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.Tab))
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.LeftShift))
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
+
         //Start shooting if time gap is enough.
         if (shootingGap < cooldown_in_seconds)
         {
@@ -34,18 +42,22 @@ public class SimpleCharacterController : MonoBehaviour
         {
             shootingGap = 0f;
             //Shoot
-            if(BulletType == bulletType.regular){
-                var clone = Instantiate(regularBullet, transform.position+new Vector3(0.8f,0f,0f), Quaternion.Euler(new Vector3 (0f,0f,-90f)));
-                //Physics.IgnoreCollision(clone.GetComponent<Collider>(), GetComponent<Collider>());
+            if (BulletType == bulletType.regular)
+            {
+                var clone = Instantiate(regularBullet, transform.position + new Vector3(0.8f, 0f, 0f), Quaternion.Euler(new Vector3(0f, 0f, -90f)));
                 clone.GetComponent<BulletMovement>().speed = bulletSpeed;
             }
             if (BulletType == bulletType.laser)
             {
                 var clone = Instantiate(laserBullet, transform.position + new Vector3(1.2f, 0f, 0f), Quaternion.Euler(new Vector3(0f, 0f, -90f)));
-                //Physics.IgnoreCollision(clone.GetComponent<Collider>(), GetComponent<Collider>());
                 clone.GetComponent<BulletMovement>().speed = bulletSpeed;
             }
         }
 
+    }
+    void OnCollisionExit(Collision other)
+    {
+        //Solving weird velocity upwards when pressed to the ground and moved a bit, but still glitchy
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }

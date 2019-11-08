@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - RedShip
+  - projectile
+  - FxTemporaire
+  - Sub
+  - Crab
   layers:
   - Default
   - TransparentFX
