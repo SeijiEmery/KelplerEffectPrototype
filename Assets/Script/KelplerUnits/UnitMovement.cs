@@ -24,14 +24,14 @@ public class UnitMovement : MonoBehaviour {
     // sets target position that unit should move to
     // should ignore y component if unit cannot move vertically
     // TODO: implement this
-    void SetMovementTarget(Vector3 targetPos) { }
+    public void SetMovementTarget(Vector3 targetPos) { }
 
     // sets firing target position for this unit
     // TODO: implement this
-    void SetFiringTarget(Vector3 targetPos) { }
+    public void SetFiringTarget(Vector3 targetPos) { }
 
     // sets movement direction for direct (WASD) movement
     // moveDir() should be normalized before using
     // TODO: implement this
-    void SetMovementDirection(Vector3 moveDir) { }
+    public void SetMovementDirection(Vector3 moveDir) { }
 }
