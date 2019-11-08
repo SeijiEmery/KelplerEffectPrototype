@@ -105,6 +105,22 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean AddSelectionButton
+        {
+            get
+            {
+                return SteamVR_Actions.default_AddSelectionButton;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean SubtractSelectionButton
+        {
+            get
+            {
+                return SteamVR_Actions.default_SubtractSelectionButton;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get
