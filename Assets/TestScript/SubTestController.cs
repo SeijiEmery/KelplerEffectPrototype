@@ -45,12 +45,12 @@ public class SubTestController : MonoBehaviour
             if (BulletType == bulletType.regular)
             {
                 var clone = Instantiate(regularBullet, transform.position + new Vector3(0.8f, 0f, 0f), Quaternion.Euler(new Vector3(0f, 0f, -90f)));
-                clone.GetComponent<BulletMovement>().speed = bulletSpeed;
+                clone.GetComponent<ProjectileMovement>().speed = bulletSpeed;
             }
             if (BulletType == bulletType.laser)
             {
                 var clone = Instantiate(laserBullet, transform.position + new Vector3(1.2f, 0f, 0f), Quaternion.Euler(new Vector3(0f, 0f, -90f)));
-                clone.GetComponent<BulletMovement>().speed = bulletSpeed;
+                clone.GetComponent<ProjectileMovement>().speed = bulletSpeed;
             }
         }
 

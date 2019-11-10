@@ -404,16 +404,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -3515665261618971134, guid: c31d6ee449cc18a49b2d6dde01bb289a,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3515665261618971134, guid: c31d6ee449cc18a49b2d6dde01bb289a,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5920782110496401524, guid: c31d6ee449cc18a49b2d6dde01bb289a,
         type: 3}
       propertyPath: m_Name
@@ -423,6 +413,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Sub
+      objectReference: {fileID: 0}
+    - target: {fileID: -3515665261618971134, guid: c31d6ee449cc18a49b2d6dde01bb289a,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3515665261618971134, guid: c31d6ee449cc18a49b2d6dde01bb289a,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5920782110496401523, guid: c31d6ee449cc18a49b2d6dde01bb289a,
         type: 3}
@@ -493,6 +493,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920782110496401527, guid: c31d6ee449cc18a49b2d6dde01bb289a,
+        type: 3}
+      propertyPath: BulletType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920782110496401527, guid: c31d6ee449cc18a49b2d6dde01bb289a,
+        type: 3}
+      propertyPath: bulletSpeed
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c31d6ee449cc18a49b2d6dde01bb289a, type: 3}
