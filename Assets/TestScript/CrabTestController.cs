@@ -22,19 +22,14 @@ public class CrabTestController : MonoBehaviour
     void FixedUpdate()
     {
         //Simple moving
-        if (Input.GetKey(KeyCode.LeftArrow))
-            transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
-        if (Input.GetKey(KeyCode.RightArrow))
-            transform.Translate(Vector3.right * speed * Time.deltaTime, Space.World);
-        if (Input.GetKey(KeyCode.UpArrow))
-            transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.World);
-        if (Input.GetKey(KeyCode.DownArrow))
-            transform.Translate(Vector3.back * speed * Time.deltaTime, Space.World);
+        var movement = Vector3.forward * Input.GetAxis("MoveZ") + Vector3.right * Input.GetAxis("MoveX");
+        transform.Translate(movement * speed * Time.deltaTime, Space.World);
+
         if (Input.GetKey(KeyCode.Q))
             transform.Rotate(Vector3.down * rotateSpeed, Space.Self);
         if (Input.GetKey(KeyCode.E))
             transform.Rotate(Vector3.up * rotateSpeed, Space.Self);
-        if (Input.GetKey(KeyCode.Tab))
+        /*if (Input.GetKey(KeyCode.Tab))
         {
             if(barreltf.localRotation.eulerAngles.x <= 300f && barreltf.localRotation.eulerAngles.x > 0f)
             {
@@ -52,7 +47,7 @@ public class CrabTestController : MonoBehaviour
             }
             else
                 barreltf.Rotate(Vector3.right, Space.Self);
-        }
+        }*/
 
 
         //Start shooting if time gap is enough.
