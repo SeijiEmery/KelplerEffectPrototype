@@ -20,18 +20,8 @@ public class SubTestController : MonoBehaviour
     void FixedUpdate()
     {
         //Simple moving
-        if (Input.GetKey(KeyCode.LeftArrow))
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.RightArrow))
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.UpArrow))
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.DownArrow))
-            transform.Translate(Vector3.back * speed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.Tab))
-            transform.Translate(Vector3.up * speed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.LeftShift))
-            transform.Translate(Vector3.down * speed * Time.deltaTime);
+        var movement = Vector3.forward * Input.GetAxis("MoveZ") + Vector3.up * Input.GetAxis("MoveY") + Vector3.right * Input.GetAxis("MoveX");
+        transform.Translate(movement * speed * Time.deltaTime);
 
         //Start shooting if time gap is enough.
         if (shootingGap < cooldown_in_seconds)
@@ -57,7 +47,7 @@ public class SubTestController : MonoBehaviour
     }
     void OnCollisionExit(Collision other)
     {
-        //Solving weird velocity upwards when pressed to the ground and moved a bit, but still glitchy
+        //Solving weird velocity upwards when pressed to the ground and moved a bit, but still glitchy (Sub could dive pass the ground sometimes)
         GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }

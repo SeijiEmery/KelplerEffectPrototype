@@ -25,10 +25,7 @@ public class CrabTestController : MonoBehaviour
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
 
         //Simple Rotation
-        if (Input.GetKey(KeyCode.Q))
-            transform.Rotate(Vector3.down * rotateSpeed, Space.Self);
-        if (Input.GetKey(KeyCode.E))
-            transform.Rotate(Vector3.up * rotateSpeed, Space.Self);
+        transform.Rotate(Vector3.up * rotateSpeed * Input.GetAxis("TurnHorizontal"), Space.Self);
 
         //Barrel angle adjustment
         if (barreltf.localRotation.eulerAngles.z >= 60f && barreltf.localRotation.eulerAngles.z <= 210f)

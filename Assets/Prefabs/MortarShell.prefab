@@ -123,3 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  firingPower: 8
+  shootingPos: {x: 0, y: 0, z: 0}
+  destroySelfAfterTimeout: 1
+  destroySelfOnFirstCollision: 1
+  timeoutLifetime: 10
