@@ -297,8 +297,8 @@ InputManager:
     m_Name: MoveY
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: tab
-    positiveButton: left shift
+    negativeButton: left shift
+    positiveButton: tab
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
