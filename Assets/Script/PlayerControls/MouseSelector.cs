@@ -21,6 +21,9 @@ public class MouseSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ////////////////////////////
+        /// Mouse input
+        ////////////////////////////
         Vector3 mousePos = Input.mousePosition;
         Ray ray = camera.ScreenPointToRay(mousePos);
         RaycastHit hit;
@@ -42,6 +45,48 @@ public class MouseSelector : MonoBehaviour
                     selectionManager.AddUnitToSelection(unit);
             }
         }
+
+
+        ////////////////////////////
+        /// Keyboard input
+        ////////////////////////////
+        Vector3 movement=new Vector3();
+        Vector3 aim = new Vector3();
+        if (Input.GetKey(KeyCode.W))
+        {
+            movement.z += 1;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            movement.x -= 1;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            movement.z -= 1;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            movement.x += 1;
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            aim.z -= 1;
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            aim.z += 1;
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            movement.y -= 1;
+        }
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            movement.y += 1;
+        }
+
+        selectionManager.MoveInDirection(movement);
+        selectionManager.TargetInDirection(aim);
     }
 
     public void HighlightObject(GameObject go)

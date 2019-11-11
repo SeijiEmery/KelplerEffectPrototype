@@ -54,14 +54,14 @@ public class UnitSelectionManager : MonoBehaviour
     {
         foreach (var unit in moveableSelectedUnits)
         {
-            unit.SetMovementDirection(normalizedMoveDir);
+            unit.MoveInDirection(normalizedMoveDir);
         }
     }
-    public void TargetInDirection(Vector3 normalizedMoveDir)
+    public void TargetInDirection(Vector3 normalizedAimDir)
     {
         foreach (var unit in moveableSelectedUnits)
         {
-            //TODO make Unit function for this
+            unit.AimInDirection(normalizedAimDir);
         }
     }
 }
