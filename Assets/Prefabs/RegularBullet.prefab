@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7773890950603685013}
   - component: {fileID: 7322441734535514684}
   - component: {fileID: 5990852461743372791}
-  - component: {fileID: 2466854699192210646}
   - component: {fileID: 6708205245949709393}
+  - component: {fileID: 4873420846329860908}
   m_Layer: 0
   m_Name: RegularBullet
   m_TagString: Untagged
@@ -95,18 +95,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2466854699192210646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060486316723860202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 644ced6f9ad56dd44b4401d6dfd9f5b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &6708205245949709393
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,3 +111,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4873420846329860908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060486316723860202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169da68b5bb7c3744bacef8ba55f2d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeoutLifetime: 10
+  destroySelfAfterTimeout: 1
+  destroySelfOnCollision: 1
+  speed: 2
