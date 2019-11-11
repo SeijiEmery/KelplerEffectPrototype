@@ -50,6 +50,16 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/AddSelectionButton",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/SubtractSelectionButton",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
