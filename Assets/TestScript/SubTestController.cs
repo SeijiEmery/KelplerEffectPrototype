@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SubTestController : MonoBehaviour
 {
-    public float speed = 6.0f;                                      //Set speed
-    public float bulletSpeed = 2.0f;
-    public float cooldown_in_seconds = 2.0f;            //Set firing rate by cooldown
-    public enum bulletType { regular, laser };            //Set bullet type
+    [SerializeField]
+    private float speed = 6.0f, bulletSpeed = 2.0f, cooldown_in_seconds = 2.0f;                                      
+    [SerializeField]
+    private GameObject regularBullet, laserBullet;
+
+    public enum bulletType { regular, laser };            
     public bulletType BulletType = bulletType.regular;
-    public GameObject regularBullet;
-    public GameObject laserBullet;
 
     private float shootingGap = 0f;
     void Start()
@@ -21,12 +21,12 @@ public class SubTestController : MonoBehaviour
     {
         //Simple moving
         var movement = Vector3.forward * Input.GetAxis("MoveZ") + Vector3.up * Input.GetAxis("MoveY") + Vector3.right * Input.GetAxis("MoveX");
-        transform.Translate(movement * speed * Time.deltaTime);
+        transform.Translate(movement * speed * Time.fixedDeltaTime);
 
         //Start shooting if time gap is enough.
         if (shootingGap < cooldown_in_seconds)
         {
-            shootingGap += Time.deltaTime;
+            shootingGap += Time.fixedDeltaTime;
         }
         else
         {

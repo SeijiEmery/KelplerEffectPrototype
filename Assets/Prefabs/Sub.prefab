@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5920782110496401527}
   - component: {fileID: -3515665261618971134}
   m_Layer: 0
-  m_Name: TempRedShip
+  m_Name: Sub
   m_TagString: RedShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,13 +107,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  bulletSpeed: 4
+  bulletSpeed: 6
   cooldown_in_seconds: 1
-  BulletType: 0
   regularBullet: {fileID: 1060486316723860202, guid: 0ad2f41d76a56484f83bf69ddd4b1c7f,
     type: 3}
   laserBullet: {fileID: 1060486316723860202, guid: 4ee99721e977c9045a45dc1fe6051797,
     type: 3}
+  BulletType: 0
 --- !u!54 &-3515665261618971134
 Rigidbody:
   m_ObjectHideFlags: 0

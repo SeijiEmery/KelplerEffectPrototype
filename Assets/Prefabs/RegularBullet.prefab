@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169da68b5bb7c3744bacef8ba55f2d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  destroySelfAfterTimeout: 1
-  destroySelfOnFirstCollision: 1
   timeoutLifetime: 10
+  destroySelfAfterTimeout: 1
+  destroySelfOnCollision: 1
+  speed: 2

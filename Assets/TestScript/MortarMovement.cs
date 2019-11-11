@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class MortarMovement : MonoBehaviour
 {
-    Rigidbody rb;
+    [SerializeField]
+    private float timeoutLifetime = 10f;
+    [SerializeField]
+    private bool destroySelfAfterTimeout = false, destroySelfOnCollision = false;
+
+    //Those would be called by Crab
     public float speed = 2f;
     public float firingPower = 8.0f;
     public Vector3 shootingPos;
-    public bool destroySelfAfterTimeout = false;
-    public bool destroySelfOnFirstCollision = false;
-    public float timeoutLifetime = 10f;
 
     private float destroyTime;
+    Rigidbody rb;
 
     void Start()
     {
@@ -27,7 +30,7 @@ public class MortarMovement : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (destroySelfOnFirstCollision)
+        if (destroySelfOnCollision)
             this.Destroy();
     }
     public void Destroy()

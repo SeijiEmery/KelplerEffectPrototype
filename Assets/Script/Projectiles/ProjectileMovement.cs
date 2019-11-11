@@ -7,10 +7,13 @@ using UnityEngine;
 // TODO: implement this
 public class ProjectileMovement : MonoBehaviour
 {
+    [SerializeField]
+    private float timeoutLifetime = 10f;
+    [SerializeField]
+    private bool destroySelfAfterTimeout = false, destroySelfOnCollision = false;
+
+    //Those would be called by Sub
     public float speed = 2f;
-    public bool destroySelfAfterTimeout = false;
-    public bool destroySelfOnFirstCollision = false;
-    public float timeoutLifetime = 10f;
 
     private float destroyTime;
 
@@ -20,13 +23,13 @@ public class ProjectileMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        transform.Translate(Vector3.up * Time.deltaTime * speed);
+        transform.Translate(Vector3.up * Time.fixedDeltaTime * speed);
         if(destroySelfAfterTimeout && destroyTime <= Time.time)
             this.Destroy();
     }
     void OnCollisionEnter(Collision collision)
     {
-        if(destroySelfOnFirstCollision)
+        if(destroySelfOnCollision)
             this.Destroy();
     }
     public void Destroy()
