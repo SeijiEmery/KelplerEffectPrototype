@@ -6,12 +6,10 @@ public class SelectableUnit : MonoBehaviour {
 
     // is this unit currently selected?
     // set by UnitSelectionManager 
-    //public bool selected { get; set; }
     public bool selected = false;
 
     // is this unit currently highlighted?
     // set by UnitSelectionManager
-    //public bool highlighted { get; set; }
     public bool highlighted = false;
 
     public Color selectionColor = Color.green;

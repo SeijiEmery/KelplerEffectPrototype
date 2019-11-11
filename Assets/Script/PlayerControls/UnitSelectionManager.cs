@@ -44,16 +44,24 @@ public class UnitSelectionManager : MonoBehaviour
             unit.SetMovementTarget(targetPos);
         }
     }
-    public void SetTargetingPosition(Vector3 targetPos) {
+    public void TargetToPosition(Vector3 targetPos) {
         foreach (var unit in moveableSelectedUnits)
         {
             unit.SetFiringTarget(targetPos);
         }
     }
-    public void SetMovementDirection(Vector3 normalizedMoveDir) {
+    public void MoveInDirection(Vector3 normalizedMoveDir)
+    {
         foreach (var unit in moveableSelectedUnits)
         {
             unit.SetMovementDirection(normalizedMoveDir);
+        }
+    }
+    public void TargetInDirection(Vector3 normalizedMoveDir)
+    {
+        foreach (var unit in moveableSelectedUnits)
+        {
+            //TODO make Unit function for this
         }
     }
 }
