@@ -33,7 +33,7 @@ public class VRRaycastSelector : MonoBehaviour
         var selectable = args.target.GetComponentInParent<SelectableUnit>();
         if (selectable != null)
         {
-            selectable.highlighted = true;
+            selectable.HandleHovering(true);
         }
     }
     void OnUnhighlightObject(object sender, PointerEventArgs args)
@@ -41,7 +41,7 @@ public class VRRaycastSelector : MonoBehaviour
         var selectable = args.target.GetComponentInParent<SelectableUnit>();
         if (selectable != null)
         {
-            selectable.highlighted = false;
+            selectable.HandleHovering(false);
         }
     }
     void OnSelectObject(object sender, PointerEventArgs args)

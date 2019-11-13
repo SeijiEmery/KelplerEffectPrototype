@@ -94,7 +94,7 @@ public class MouseSelector : MonoBehaviour
         var selectable = go.GetComponent<SelectableUnit>();
         if (selectable != null)
         {
-            selectable.highlighted = true;
+            selectable.HandleHovering(true);
         }
     }
     void UnhighlightObject(GameObject go)
@@ -102,7 +102,7 @@ public class MouseSelector : MonoBehaviour
         var selectable = go.GetComponentInParent<SelectableUnit>();
         if (selectable != null)
         {
-            selectable.highlighted = false;
+            selectable.HandleHovering(false);
         }
     }
 }

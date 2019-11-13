@@ -12,7 +12,7 @@ public class UnitSelectionManager : MonoBehaviour
     private List<SelectableUnit> selectedUnits = new List<SelectableUnit>();
 
     public void AddUnitToSelection(SelectableUnit unit) {
-        unit.selected = true;
+        unit.Select(true);
         var movement = unit.GetComponent<UnitMovement>();
         if (movement != null)
         {
@@ -21,7 +21,7 @@ public class UnitSelectionManager : MonoBehaviour
         selectedUnits.Add(unit);
     }
     public void RemoveUnitFromSelection(SelectableUnit unit) {
-        unit.selected = false;
+        unit.Select(false);
         var movement = unit.GetComponent<UnitMovement>();
         if (movement != null)
         {
@@ -32,7 +32,7 @@ public class UnitSelectionManager : MonoBehaviour
     public void ClearSelection() {
         foreach (var unit in selectedUnits)
         {
-            unit.selected = false;    
+            unit.Select(false);   
         }
         moveableSelectedUnits.Clear();
         selectedUnits.Clear();
