@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubTestController : MonoBehaviour
+public class FriendlySubController : SubController
 {
     [SerializeField]
     private float speed = 6.0f, bulletSpeed = 2.0f, cooldown_in_seconds = 2.0f;                                      
