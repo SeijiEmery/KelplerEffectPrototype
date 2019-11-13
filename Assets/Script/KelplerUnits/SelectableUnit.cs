@@ -17,14 +17,14 @@ public class SelectableUnit : MonoBehaviour {
 
     private Material material;
     private Color initialColor;
-    private void Start()
+    protected void Start()
     {
         material = GetComponent<MeshRenderer>().material;
         initialColor = material.color;
     }
 
     // very inefficient, but whatever, this is a prototype
-    private void Update()
+    protected void Update()
     {
         material.color = selected ? selectionColor : highlighted ? highlightColor : initialColor;
     }
