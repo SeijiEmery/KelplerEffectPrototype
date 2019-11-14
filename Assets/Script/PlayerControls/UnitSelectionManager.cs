@@ -11,15 +11,9 @@ public class UnitSelectionManager : MonoBehaviour
 	[SerializeField]
 	private ControllableSubGroupManager subGroupManager;
 
-    private List<UnitMovement> moveableSelectedUnits = new List<UnitMovement>();
-    private List<SelectableUnit> selectedUnits = new List<SelectableUnit>();
+	public List<SelectableUnit> SelectedUnits { get; } = new List<SelectableUnit>();
 
-	private void Update()
-	{
-		// TODO: An input manager is needed.
-		if (Input.GetButtonDown("CommandAttack"))
-			subGroupManager.Attack(selectedUnits);
-	}
+	private List<UnitMovement> moveableSelectedUnits = new List<UnitMovement>();
 
 	public void AddUnitToSelection(SelectableUnit unit)
 	{
@@ -29,7 +23,7 @@ public class UnitSelectionManager : MonoBehaviour
         {
             moveableSelectedUnits.Add(movement);
         }
-        selectedUnits.Add(unit);
+        SelectedUnits.Add(unit);
     }
 
     public void RemoveUnitFromSelection(SelectableUnit unit) 
@@ -40,17 +34,17 @@ public class UnitSelectionManager : MonoBehaviour
         {
             moveableSelectedUnits.Remove(movement);
         }
-        selectedUnits.Remove(unit);
+        SelectedUnits.Remove(unit);
     }
 
     public void ClearSelection()
 	{
-        foreach (var unit in selectedUnits)
+        foreach (var unit in SelectedUnits)
         {
             unit.selected = false;    
         }
         moveableSelectedUnits.Clear();
-        selectedUnits.Clear();
+        SelectedUnits.Clear();
     }
 
     public void MoveToPosition(Vector3 targetPos)

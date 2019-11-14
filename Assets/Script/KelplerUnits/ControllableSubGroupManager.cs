@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class ControllableSubGroupManager : MonoBehaviour
 {
-	public void Attack(List<SelectableUnit> selectedUnits)
+	[SerializeField]
+	private UnitSelectionManager unitSelectionManager;
+
+	private void Update()
 	{
+		// TODO: An input manager may be needed.
+		if (Input.GetButtonDown("CommandAttack"))
+			Attack();
+	}
+
+	public void Attack()
+	{
+		List<SelectableUnit> selectedUnits = unitSelectionManager.SelectedUnits;
+
 		List<SubController> attackers = new List<SubController>();
 		List<GameObject> targets = new List<GameObject>();
 
@@ -22,6 +34,8 @@ public class ControllableSubGroupManager : MonoBehaviour
 				targets.Add(unit.gameObject);
 			}
 		}
+
+		unitSelectionManager.ClearSelection();
 
 		if (attackers.Count == 0)
 		{

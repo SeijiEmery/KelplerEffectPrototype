@@ -129,7 +129,7 @@ MonoBehaviour:
   rotateSpeed: 2
   bulletSpeed: 2
   shootingCooldown: 2
-  detectionRadius: 5
+  detectionRadius: 4
   detectionInterval: 0.2
   bulletPrefab: {fileID: 1060486316723860202, guid: 0ad2f41d76a56484f83bf69ddd4b1c7f,
     type: 3}
