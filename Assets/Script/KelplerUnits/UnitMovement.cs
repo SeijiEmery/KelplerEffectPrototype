@@ -82,6 +82,11 @@ public class UnitMovement : MonoBehaviour
     // TODO: implement this
     public void SetMovementTarget(Vector3 targetPos)
     {
+        if (!allowVerticalMovement)
+        {
+            targetPos.y = transform.position.y;
+        }
+
         Destination = targetPos;
     }
 
@@ -98,6 +103,12 @@ public class UnitMovement : MonoBehaviour
     public void MoveInDirection(Vector3 moveDir)
     {
         moveDir = moveDir.normalized * moveSpeed * Time.deltaTime * 10;
+
+        if (!allowVerticalMovement)
+        {
+            moveDir.y = 0;
+        }
+
         Destination += moveDir;
     }
 
