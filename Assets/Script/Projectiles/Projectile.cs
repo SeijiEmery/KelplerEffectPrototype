@@ -5,7 +5,7 @@ using UnityEngine;
 // Controls projectile movement
 // Damage + triggering is applied by DamageTrigger.cs
 // TODO: implement this
-public class ProjectileMovement : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     [SerializeField]
     private float timeoutLifetime = 10f;
@@ -31,9 +31,11 @@ public class ProjectileMovement : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if(destroySelfOnCollision)
-            this.Destroy();
-    }
+		collision.gameObject.GetComponentInChildren<Health>()?.AddHealth(-10f);
+
+		if (destroySelfOnCollision)
+				this.Destroy();
+	}
     public void Destroy()
     {
         Destroy(gameObject);

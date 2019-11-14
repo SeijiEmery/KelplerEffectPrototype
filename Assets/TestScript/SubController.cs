@@ -17,11 +17,16 @@ public class SubController : MonoBehaviour
 	private float detectionInterval = 1;
 
 	[SerializeField]
-	private GameObject bulletPrefab;
+	private Health m_health;
+
+	[SerializeField]
+	private GameObject m_bulletPrefab;
 
 	private void Awake()
 	{
 		m_selectableUnit = GetComponent<SelectableUnit>();
+
+		m_health.onDestroyed += HandleOnDestroyed;
 
 		// TODO: Horrendous race condition with SelectableUnit.
 		if (Faction == "f")
@@ -145,12 +150,17 @@ public class SubController : MonoBehaviour
 		if (m_currentTarget != null)
 		{
 			// TODO: Very erroneous rotation.
-			GameObject bullet = Instantiate(bulletPrefab, transform.position + transform.forward * 0.8f, Quaternion.identity);
-			bullet.GetComponent<ProjectileMovement>().direction = transform.forward;
-			bullet.GetComponent<ProjectileMovement>().speed = bulletSpeed;
+			GameObject bullet = Instantiate(m_bulletPrefab, transform.position + transform.forward * 0.8f, Quaternion.identity);
+			bullet.GetComponent<Projectile>().direction = transform.forward;
+			bullet.GetComponent<Projectile>().speed = bulletSpeed;
 
 			m_shootingGap = 0f;
 		}
+	}
+
+	private void HandleOnDestroyed()
+	{
+		Destroy(gameObject);
 	}
 
 	private SelectableUnit m_selectableUnit;
