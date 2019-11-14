@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
 		collision.gameObject.GetComponentInChildren<Health>()?.AddHealth(-10f);
 
 		if (destroySelfOnCollision)
-				this.Destroy();
+			this.Destroy();
 	}
     public void Destroy()
     {

@@ -11,10 +11,10 @@ public class SubController : MonoBehaviour
 	private float speed = 1f, rotateSpeed = 2f, bulletSpeed = 2f, shootingCooldown = 2f;
 
 	[SerializeField]
-	private float detectionRadius = 5;
+	private float m_detectionRadius = 5;
 
 	[SerializeField]
-	private float detectionInterval = 1;
+	private float m_detectionInterval = 1;
 
 	[SerializeField]
 	private Health m_health;
@@ -28,7 +28,7 @@ public class SubController : MonoBehaviour
 
 		m_health.onDestroyed += HandleOnDestroyed;
 
-		// TODO: Horrendous race condition with SelectableUnit.
+		// TODO: Horrendous race condition with SelectableUnit.Start
 		if (Faction == "f")
 		{
 			GetComponent<MeshRenderer>().material.color = Color.yellow;
@@ -57,22 +57,29 @@ public class SubController : MonoBehaviour
 
 		DetectNearbyTarget();
 
+		Vector3 lookAtPosition = new Vector3();
+
+		if (m_assignedTarget != null)
+		{
+			lookAtPosition = m_assignedTarget.transform.position;
+
+			// Assigned target's position overrides any other as destination.
+			m_destination = m_assignedTarget.transform.position;
+		}
+
 		if (m_currentTarget != null)
 		{
-			transform.LookAt(m_currentTarget.transform);
-
+			// Look at nearby target first.
+			lookAtPosition = m_currentTarget.transform.position;
+			
 			AutoAttack();
 		}
-		else
-		{
-			if (m_assignedTarget != null)
-			{
-				transform.LookAt(m_assignedTarget.transform);
-			}
-		}
 
-		// Keep moving to the assigned target, even if there is an enemy sub nearby.
-		if (m_currentTarget != m_assignedTarget)
+		transform.LookAt(lookAtPosition);
+
+		// Move if any of the following condition is met.
+		// Current there's only one condition: There's an assigned target, and it's not nearby.
+		if (m_assignedTarget != null && (m_assignedTarget.transform.position - transform.position).magnitude > m_detectionRadius)
 		{
 			AutoMove();
 		}
@@ -80,10 +87,10 @@ public class SubController : MonoBehaviour
 
 	private void DetectNearbyTarget()
 	{
-		if (m_detectionGap < detectionInterval) { m_detectionGap += Time.fixedDeltaTime; return; }
+		if (m_detectionGap < m_detectionInterval) { m_detectionGap += Time.fixedDeltaTime; return; }
 		else { m_detectionGap = 0f; }
 
-		List<Collider> nearbyColliders = new List<Collider>(Physics.OverlapSphere(transform.position, detectionRadius));
+		List<Collider> nearbyColliders = new List<Collider>(Physics.OverlapSphere(transform.position, m_detectionRadius));
 
 		// Prioritize the assigned target, if it's nearby.
 		if (m_assignedTarget != null && nearbyColliders.Contains(m_assignedTarget.gameObject.GetComponent<Collider>()))
@@ -137,11 +144,6 @@ public class SubController : MonoBehaviour
 	public void ControlledAttack(GameObject target)
 	{
 		m_assignedTarget = target;
-
-		if (Vector3.Distance(transform.position, target.transform.position) > detectionRadius)
-		{
-			m_destination = target.transform.position;
-		}
 	}
 
 	private void AutoAttack()
