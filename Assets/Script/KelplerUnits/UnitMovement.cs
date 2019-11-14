@@ -6,7 +6,7 @@ public class UnitMovement : MonoBehaviour
 {
 
     // movement speed, in m/s
-    public float moveSpeed = 0.1f;
+    public float moveSpeed = 1f;
 
     // rotation speeds, in deg/s
     public float yawTurnSpeed = 45f;

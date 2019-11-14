@@ -124,11 +124,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Faction: f
-  speed: 6
+  speed: 3
+  rotateSpeed: 2
   bulletSpeed: 2
   shootingCooldown: 2
   detectionRadius: 3
-  detectionInterval: 1
+  detectionInterval: 0.2
 --- !u!114 &9185314703657270090
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,10 +8,21 @@ using UnityEngine;
 // A unit is selectable iff it has a SelectableUnit component.
 public class UnitSelectionManager : MonoBehaviour
 {
+	[SerializeField]
+	private ControllableSubGroupManager subGroupManager;
+
     private List<UnitMovement> moveableSelectedUnits = new List<UnitMovement>();
     private List<SelectableUnit> selectedUnits = new List<SelectableUnit>();
 
-    public void AddUnitToSelection(SelectableUnit unit) {
+	private void Update()
+	{
+		// TODO: An input manager is needed.
+		if (Input.GetButtonDown("CommandAttack"))
+			subGroupManager.Attack(selectedUnits);
+	}
+
+	public void AddUnitToSelection(SelectableUnit unit)
+	{
         unit.selected = true;
         var movement = unit.GetComponent<UnitMovement>();
         if (movement != null)
@@ -20,7 +31,9 @@ public class UnitSelectionManager : MonoBehaviour
         }
         selectedUnits.Add(unit);
     }
-    public void RemoveUnitFromSelection(SelectableUnit unit) {
+
+    public void RemoveUnitFromSelection(SelectableUnit unit) 
+	{
         unit.selected = false;
         var movement = unit.GetComponent<UnitMovement>();
         if (movement != null)
@@ -29,7 +42,9 @@ public class UnitSelectionManager : MonoBehaviour
         }
         selectedUnits.Remove(unit);
     }
-    public void ClearSelection() {
+
+    public void ClearSelection()
+	{
         foreach (var unit in selectedUnits)
         {
             unit.selected = false;    
@@ -38,13 +53,15 @@ public class UnitSelectionManager : MonoBehaviour
         selectedUnits.Clear();
     }
 
-    public void MoveToPosition(Vector3 targetPos) {
+    public void MoveToPosition(Vector3 targetPos)
+	{
         foreach (var unit in moveableSelectedUnits)
         {
             unit.SetMovementTarget(targetPos);
         }
     }
-    public void TargetToPosition(Vector3 targetPos) {
+    public void TargetToPosition(Vector3 targetPos)
+	{
         foreach (var unit in moveableSelectedUnits)
         {
             unit.SetFiringTarget(targetPos);
@@ -57,6 +74,7 @@ public class UnitSelectionManager : MonoBehaviour
             unit.MoveInDirection(normalizedMoveDir);
         }
     }
+
     public void TargetInDirection(Vector3 normalizedAimDir)
     {
         foreach (var unit in moveableSelectedUnits)
