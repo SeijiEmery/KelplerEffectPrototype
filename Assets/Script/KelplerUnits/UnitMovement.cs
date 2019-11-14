@@ -48,15 +48,6 @@ public class UnitMovement : MonoBehaviour
         destinationLR.endWidth = 0.0f;
         destinationLR.material = GetComponentInParent<MeshRenderer>().material;
         destinationLR.material.color = new Color(0, 100, 100);
-
-        go = new GameObject("AimLR");
-        go.transform.SetParent(transform);
-        aimLR = go.AddComponent<LineRenderer>();
-        //TODO: Extract these magic numbers
-        aimLR.startWidth = 0.05f;
-        aimLR.endWidth = 0.00f;
-        aimLR.material = GetComponent<MeshRenderer>().material;
-        aimLR.material.color = new Color(255, 0, 0);
         
 
     }
@@ -66,8 +57,11 @@ public class UnitMovement : MonoBehaviour
         destinationLR.SetPosition(0, transform.position);
         destinationLR.SetPosition(1, Destination);
 
-        aimLR.SetPosition(0, transform.position);
-        aimLR.SetPosition(1, Aim);
+        if (aimLR != null)
+        {
+            aimLR.SetPosition(0, transform.position);
+            aimLR.SetPosition(1, Aim);
+        }
     }
 
     private void FixedUpdate()
