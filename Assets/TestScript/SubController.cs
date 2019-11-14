@@ -31,7 +31,7 @@ public class SubController : MonoBehaviour
 		// TODO: Horrendous race condition with SelectableUnit.
 		if (Faction == "f")
 		{
-			GetComponent<MeshRenderer>().material.color = Color.red;
+			GetComponent<MeshRenderer>().material.color = Color.yellow;
 		}
 		else if (Faction == "e")
 		{
@@ -42,6 +42,12 @@ public class SubController : MonoBehaviour
 	private void Start()
 	{
 		m_destination = transform.position;
+
+		if (Faction == "e")
+		{
+			// TODO: There should be a game state object, to keep track of those.
+			ControlledAttack(GameObject.Find("Castle"));
+		}
 	}
 
 	private void FixedUpdate()
