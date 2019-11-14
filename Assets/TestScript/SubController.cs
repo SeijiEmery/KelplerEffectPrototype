@@ -33,12 +33,25 @@ public class SubController : MonoBehaviour
 
 		DetectNearbyTarget();
 
+		if (m_currentTarget != null)
+		{
+			transform.LookAt(m_currentTarget.transform);
+
+			AutoAttack();
+		}
+		else
+		{
+			if (m_assignedTarget != null)
+			{
+				transform.LookAt(m_assignedTarget.transform);
+			}
+		}
+
+		// Keep moving to the assigned target, even if there is an enemy sub nearby.
 		if (m_currentTarget != m_assignedTarget)
 		{
 			AutoMove();
 		}
-
-		AutoAttack();
 	}
 
 	private void DetectNearbyTarget()
