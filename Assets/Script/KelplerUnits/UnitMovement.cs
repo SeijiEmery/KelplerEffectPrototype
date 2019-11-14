@@ -82,10 +82,14 @@ public class UnitMovement : MonoBehaviour
     // TODO: implement this
     public void SetMovementTarget(Vector3 targetPos)
     {
+        UnitSelectionManager manager = UnitSelectionManager.Instance;
         if (!allowVerticalMovement)
         {
             targetPos.y = transform.position.y;
         }
+        targetPos.x = Mathf.Clamp(targetPos.x, manager.MinX, manager.MaxX);
+        targetPos.y = Mathf.Clamp(targetPos.y, manager.MinY, manager.MaxY);
+        targetPos.z = Mathf.Clamp(targetPos.z, manager.MinZ, manager.MaxZ);
 
         Destination = targetPos;
     }
@@ -102,14 +106,20 @@ public class UnitMovement : MonoBehaviour
     // TODO: implement this
     public void MoveInDirection(Vector3 moveDir)
     {
+        UnitSelectionManager manager = UnitSelectionManager.Instance;
         moveDir = moveDir.normalized * moveSpeed * Time.deltaTime * 10;
 
         if (!allowVerticalMovement)
         {
             moveDir.y = 0;
         }
+        Vector3 targetPos = Destination + moveDir;
 
-        Destination += moveDir;
+        targetPos.x = Mathf.Clamp(targetPos.x, manager.MinX, manager.MaxX);
+        targetPos.y = Mathf.Clamp(targetPos.y, manager.MinY, manager.MaxY);
+        targetPos.z = Mathf.Clamp(targetPos.z, manager.MinZ, manager.MaxZ);
+
+        Destination = targetPos;
     }
 
     // Move the point being aimed at based on

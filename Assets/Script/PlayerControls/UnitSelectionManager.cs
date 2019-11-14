@@ -8,8 +8,48 @@ using UnityEngine;
 // A unit is selectable iff it has a SelectableUnit component.
 public class UnitSelectionManager : MonoBehaviour
 {
+    static public UnitSelectionManager Instance
+    {
+        get;
+        private set;
+    }
+
+    [SerializeField]
+    private float minX = -1;
+    public float MinX { get { return minX; } }
+
+    [SerializeField]
+    private float maxX = 1;
+    public float MaxX { get { return maxX; } }
+
+    [SerializeField]
+    private float minY = 0.5f;
+    public float MinY { get { return minY; } }
+
+    [SerializeField]
+    private float maxY = 1.5f;
+    public float MaxY { get { return maxY; } }
+
+    [SerializeField]
+    private float minZ = 0.5f;
+    public float MinZ { get { return minZ; } }
+
+    [SerializeField]
+    private float maxZ = 1.5f;
+    public float MaxZ { get { return maxZ; } }
+
     private List<UnitMovement> moveableSelectedUnits = new List<UnitMovement>();
     private List<SelectableUnit> selectedUnits = new List<SelectableUnit>();
+
+    private void Awake()
+    {
+        if(Instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+    }
 
     public void AddUnitToSelection(SelectableUnit unit) {
         unit.Select(true);
