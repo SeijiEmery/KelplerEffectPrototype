@@ -15,6 +15,8 @@ public class ProjectileMovement : MonoBehaviour
     //Those would be called by Sub
     public float speed = 2f;
 
+	public Vector3 direction { get; set; }
+
     private float destroyTime;
 
     void Start()
@@ -23,8 +25,8 @@ public class ProjectileMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        transform.Translate(Vector3.up * Time.fixedDeltaTime * speed);
-        if(destroySelfAfterTimeout && destroyTime <= Time.time)
+		transform.Translate(direction * Time.fixedDeltaTime * speed);
+		if (destroySelfAfterTimeout && destroyTime <= Time.time)
             this.Destroy();
     }
     void OnCollisionEnter(Collision collision)

@@ -35,11 +35,9 @@ public class ControllableSubGroupManager : MonoBehaviour
 			return;
 		}
 
-		int attackersPerTarget = Mathf.Max(attackers.Count / targets.Count, 1);
-
 		for (int i = 0; i < attackers.Count; i++)
 		{
-			attackers[i].ControlledAttack(targets[i / attackersPerTarget]);
+			attackers[i].ControlledAttack(targets[i % targets.Count]);
 		}
 	}
 }

@@ -16,9 +16,22 @@ public class SubController : MonoBehaviour
 	[SerializeField]
 	private float detectionInterval = 1;
 
+	[SerializeField]
+	private GameObject bulletPrefab;
+
 	private void Awake()
 	{
 		m_selectableUnit = GetComponent<SelectableUnit>();
+
+		// TODO: Horrendous race condition with SelectableUnit.
+		if (Faction == "f")
+		{
+			GetComponent<MeshRenderer>().material.color = Color.red;
+		}
+		else if (Faction == "e")
+		{
+			GetComponent<MeshRenderer>().material.color = Color.blue;
+		}
 	}
 
 	private void Start()
@@ -89,9 +102,6 @@ public class SubController : MonoBehaviour
 				}
 			}
 		}
-
-		if (Faction == "f")
-			Debug.Log(gameObject.name + " detects " + m_currentTarget?.transform.position.ToString());
 	}
 
 	private void ControlledMove()
@@ -125,9 +135,21 @@ public class SubController : MonoBehaviour
 
 	private void AutoAttack()
 	{
+		if (m_shootingGap < shootingCooldown)
+		{
+			m_shootingGap += Time.fixedDeltaTime;
+
+			return;
+		}
+
 		if (m_currentTarget != null)
 		{
-			// TODO: Attack.
+			// TODO: Very erroneous rotation.
+			GameObject bullet = Instantiate(bulletPrefab, transform.position + transform.forward * 0.8f, Quaternion.identity);
+			bullet.GetComponent<ProjectileMovement>().direction = transform.forward;
+			bullet.GetComponent<ProjectileMovement>().speed = bulletSpeed;
+
+			m_shootingGap = 0f;
 		}
 	}
 
@@ -139,5 +161,7 @@ public class SubController : MonoBehaviour
 
 	private GameObject m_currentTarget;
 
-	private float m_detectionGap;
+	private float m_detectionGap = 0.5f;
+
+	private float m_shootingGap = 0.5f;
 }
