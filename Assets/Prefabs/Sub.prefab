@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0633a2a537a6b40a4b234ec2326cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Faction: f
   speed: 6
   bulletSpeed: 2
   shootingCooldown: 2

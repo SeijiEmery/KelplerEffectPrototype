@@ -1,16 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SubController : MonoBehaviour
 {
-	public bool Friendly;
+	public string Faction = "f";
 
 	[SerializeField]
 	private float speed = 6.0f, bulletSpeed = 2.0f, shootingCooldown = 2.0f;
 
 	[SerializeField]
-	private float detectionRadius = 3;
+	private float detectionRadius = 5;
 
 	[SerializeField]
 	private float detectionInterval = 1;
@@ -20,15 +21,14 @@ public class SubController : MonoBehaviour
 		m_selectableUnit = GetComponent<SelectableUnit>();
 	}
 
-	private void Start()
-	{
-		StartCoroutine(DetectSurroundingObjects());
-	}
-
 	private void FixedUpdate()
 	{
-		if (Friendly && m_selectableUnit.selected)
+		if (Faction == "f" && m_selectableUnit.selected)
 			ControlledMove();
+
+		FindTarget();
+
+		AutoAttack();
 	}
 
 	private void ControlledMove()
@@ -37,39 +37,36 @@ public class SubController : MonoBehaviour
 		transform.Translate(movement * speed * Time.fixedDeltaTime);
 	}
 
-	private IEnumerator DetectSurroundingObjects()
+	private void FindTarget()
 	{
-		while (true)
+		if (m_detectionGap < detectionInterval) { m_detectionGap += Time.fixedDeltaTime; return; }
+		else { m_detectionGap = 0f; }
+
+		List<Collider> nearbyColliders = new List<Collider>(Physics.OverlapSphere(transform.position, detectionRadius));
+
+		// Don't get a new target, if the current target is still nearby.
+		if (m_currentTarget != null && nearbyColliders.Contains(m_currentTarget.gameObject.GetComponent<Collider>()))
 		{
-			Debug.Log("detect");
+			return;
+		}
 
-			Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, detectionRadius);
+		m_currentTarget = null;
 
-			foreach (Collider collider in nearbyColliders)
+		foreach (Collider collider in nearbyColliders)
+		{
+			SubController subController = collider.gameObject.GetComponent<SubController>();
+
+			if (subController != null && subController != this)
 			{
-				SubController subController = collider.gameObject.GetComponent<SubController>();
-
-				if (subController != null)
+				if (subController.Faction != Faction)
 				{
-					m_nearbySubs.Add(subController);
+					m_currentTarget = subController;
 				}
 			}
-
-
-
-			yield return new WaitForSeconds(detectionInterval);
 		}
-	}
 
-	private void SetTarget()
-	{
-		foreach (SubController subController in m_nearbySubs)
-		{
-			if (!Friendly)
-			{
-				m_currentTarget = subController;
-			}
-		}
+		if (Faction == "f")
+			Debug.Log(gameObject.name + " detects " + m_currentTarget?.transform.position.ToString());
 	}
 
 	private void AutoAttack()
@@ -82,7 +79,7 @@ public class SubController : MonoBehaviour
 
 	private SelectableUnit m_selectableUnit;
 
-	private List<SubController> m_nearbySubs = new List<SubController>();
-
 	private SubController m_currentTarget;
+
+	private float m_detectionGap;
 }
