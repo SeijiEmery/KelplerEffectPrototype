@@ -8,11 +8,51 @@ using UnityEngine;
 // A unit is selectable iff it has a SelectableUnit component.
 public class UnitSelectionManager : MonoBehaviour
 {
+    static public UnitSelectionManager Instance
+    {
+        get;
+        private set;
+    }
+
+    [SerializeField]
+    private float minX = -1;
+    public float MinX { get { return minX; } }
+
+    [SerializeField]
+    private float maxX = 1;
+    public float MaxX { get { return maxX; } }
+
+    [SerializeField]
+    private float minY = 0.5f;
+    public float MinY { get { return minY; } }
+
+    [SerializeField]
+    private float maxY = 1.5f;
+    public float MaxY { get { return maxY; } }
+
+    [SerializeField]
+    private float minZ = 0.5f;
+    public float MinZ { get { return minZ; } }
+
+    [SerializeField]
+    private float maxZ = 1.5f;
+    public float MaxZ { get { return maxZ; } }
+
     private List<UnitMovement> moveableSelectedUnits = new List<UnitMovement>();
     private List<SelectableUnit> selectedUnits = new List<SelectableUnit>();
 
+    private void Awake()
+    {
+        if(Instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+    }
+
     public void AddUnitToSelection(SelectableUnit unit) {
-        unit.selected = true;
+        unit.Select(true);
         var movement = unit.GetComponent<UnitMovement>();
         if (movement != null)
         {
@@ -21,7 +61,7 @@ public class UnitSelectionManager : MonoBehaviour
         selectedUnits.Add(unit);
     }
     public void RemoveUnitFromSelection(SelectableUnit unit) {
-        unit.selected = false;
+        unit.Select(false);
         var movement = unit.GetComponent<UnitMovement>();
         if (movement != null)
         {
@@ -32,7 +72,7 @@ public class UnitSelectionManager : MonoBehaviour
     public void ClearSelection() {
         foreach (var unit in selectedUnits)
         {
-            unit.selected = false;    
+            unit.Select(false);   
         }
         moveableSelectedUnits.Clear();
         selectedUnits.Clear();
@@ -54,14 +94,14 @@ public class UnitSelectionManager : MonoBehaviour
     {
         foreach (var unit in moveableSelectedUnits)
         {
-            unit.SetMovementDirection(normalizedMoveDir);
+            unit.MoveInDirection(normalizedMoveDir);
         }
     }
-    public void TargetInDirection(Vector3 normalizedMoveDir)
+    public void TargetInDirection(Vector3 normalizedAimDir)
     {
         foreach (var unit in moveableSelectedUnits)
         {
-            //TODO make Unit function for this
+            unit.AimInDirection(normalizedAimDir);
         }
     }
 }
