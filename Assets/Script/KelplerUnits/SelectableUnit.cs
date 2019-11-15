@@ -15,11 +15,13 @@ public class SelectableUnit : MonoBehaviour {
     public Color selectionColor = Color.green;
     public Color highlightColor = Color.cyan;
 
+    public GameObject materialObj;
     private Material material;
     private Color initialColor;
     private void Start()
     {
-        material = GetComponent<MeshRenderer>().material;
+        if (materialObj == null) materialObj = gameObject;
+        material = materialObj.GetComponent<MeshRenderer>().material;
         initialColor = material.color;
     }
 
