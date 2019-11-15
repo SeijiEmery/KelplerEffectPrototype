@@ -106,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1695989585815037687}
   - component: {fileID: 7551743336441580651}
+  - component: {fileID: 6540761323207070133}
   m_Layer: 0
   m_Name: Torpedo
   m_TagString: Untagged
@@ -144,6 +145,20 @@ MonoBehaviour:
   destroySelfAfterTimeout: 1
   destroySelfOnCollision: 1
   speed: 0.2
+--- !u!136 &6540761323207070133
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2795441751156586960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6006643605456854054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151,11 +166,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1695989585815037687}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 4c6b5ae897261447faaa88f95cdc2c8d,
-        type: 3}
-      propertyPath: m_Name
-      value: torpObj
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4c6b5ae897261447faaa88f95cdc2c8d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -225,6 +235,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4c6b5ae897261447faaa88f95cdc2c8d,
+        type: 3}
+      propertyPath: m_Name
+      value: torpObj
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c6b5ae897261447faaa88f95cdc2c8d, type: 3}

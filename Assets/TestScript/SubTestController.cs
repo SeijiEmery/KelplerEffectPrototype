@@ -21,7 +21,7 @@ public class SubTestController : MonoBehaviour
     void FixedUpdate()
     {
         //Simple moving
-        var movement = Vector3.forward * Input.GetAxis("MoveZ") + Vector3.up * Input.GetAxis("MoveY") + Vector3.right * Input.GetAxis("MoveX");
+        var movement = Vector3.forward * Input.GetAxis("MoveX") + Vector3.up * Input.GetAxis("MoveY") + Vector3.right * -Input.GetAxis("MoveZ");
         transform.Translate(movement * speed * Time.fixedDeltaTime);
 
         //Start shooting if time gap is enough.

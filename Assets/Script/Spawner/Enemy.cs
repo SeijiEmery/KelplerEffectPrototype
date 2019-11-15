@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour {
 
     void Start() {
     //Randomly Assigned MoveSpeed in x direction
-    xSpeed = Mathf.Ceil(rand.Next(3) + 1);
+    xSpeed = Mathf.Ceil(rand.Next(2) + 1);
     divider = rand.Next(8) + 2;
     speed = -(int)xSpeed*Time.deltaTime / (int)divider;
     }
@@ -22,5 +22,11 @@ public class Enemy : MonoBehaviour {
         if (enemy.transform.position.x <= -5.8) {
             Destroy(enemy);
         }
+    }
+    void OnCollisionEnter()
+    {
+        Debug.Log("Collision Happened");
+        //if (!collision.gameObject.CompareTag("Sub"))
+            Destroy(gameObject);
     }
 }
