@@ -23,7 +23,7 @@ public class ProjectileMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        transform.Translate(transform.rotation * Vector3.forward * Time.fixedDeltaTime * speed);
+        transform.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
         if(destroySelfAfterTimeout && destroyTime <= Time.time)
             this.Destroy();
     }

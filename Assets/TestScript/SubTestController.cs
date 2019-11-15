@@ -5,12 +5,13 @@ using UnityEngine;
 public class SubTestController : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 6.0f, bulletSpeed = 2.0f, cooldown_in_seconds = 2.0f;                                      
+    private float speed = 6.0f, bulletSpeed = 2.0f, cooldown_in_seconds = 2.0f;
     [SerializeField]
     private GameObject regularBullet, laserBullet;
 
     public enum bulletType { regular, laser };            
     public bulletType BulletType = bulletType.regular;
+    public Transform firePoint;
 
     private float shootingGap = 0f;
     void Start()
@@ -34,12 +35,12 @@ public class SubTestController : MonoBehaviour
             //Shoot
             if (BulletType == bulletType.regular)
             {
-                var clone = Instantiate(regularBullet, transform.position + new Vector3(0.8f, 0f, 0f), Quaternion.Euler(new Vector3(0f, 0f, -90f)));
+                var clone = Instantiate(regularBullet, firePoint.position, firePoint.rotation);
                 clone.GetComponent<ProjectileMovement>().speed = bulletSpeed;
             }
             if (BulletType == bulletType.laser)
             {
-                var clone = Instantiate(laserBullet, transform.position + new Vector3(1.2f, 0f, 0f), Quaternion.Euler(new Vector3(0f, 0f, -90f)));
+                var clone = Instantiate(laserBullet, firePoint.position, firePoint.rotation);
                 clone.GetComponent<ProjectileMovement>().speed = bulletSpeed;
             }
         }
