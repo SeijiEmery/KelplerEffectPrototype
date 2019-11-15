@@ -23,10 +23,15 @@ public class Enemy : MonoBehaviour {
             Destroy(enemy);
         }
     }
-    void OnCollisionEnter()
+    void OnCollisionEnter(Collision hitEnemy)
     {
-        Debug.Log("Collision Happened");
-        //if (!collision.gameObject.CompareTag("Sub"))
+        Debug.Log("Collision Happened " + hitEnemy.collider.name);
+        if (!hitEnemy.gameObject.CompareTag("Sub")) {
             Destroy(gameObject);
+        }
+        if (hitEnemy.collider.tag == "projectile") {
+            Destroy(gameObject);
+        }
+
     }
 }
