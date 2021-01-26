@@ -8,12 +8,8 @@ public class SelectableUnit : MonoBehaviour {
     // set by UnitSelectionManager 
     public bool selected = false;
 
-    // is this unit currently highlighted?
-    // set by UnitSelectionManager
-    public bool highlighted = false;
-
-    public Color selectionColor = Color.green;
-    public Color highlightColor = Color.cyan;
+    [SerializeField] private Color selectionColor = Color.green;
+    [SerializeField] private Color hoverColor = Color.cyan;
 
     private Material material;
     private Color initialColor;
@@ -23,9 +19,23 @@ public class SelectableUnit : MonoBehaviour {
         initialColor = material.color;
     }
 
-    // very inefficient, but whatever, this is a prototype
     private void Update()
     {
-        material.color = selected ? selectionColor : highlighted ? highlightColor : initialColor;
+
+    }
+
+    public void Select(bool selected)
+    {
+        material.color = selected ? selectionColor : initialColor;
+
+        this.selected = selected;
+    }
+
+    public void HandleHovering(bool hoverOn)
+    {
+        if (hoverOn)
+            material.color = hoverColor;
+        else
+            material.color = selected ? selectionColor : initialColor;
     }
 }
